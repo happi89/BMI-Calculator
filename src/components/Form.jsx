@@ -4,17 +4,24 @@ const Form = () => {
 	const [height, setHeight] = useState('');
 	const [weight, setWeight] = useState('');
 
-	const onSubmit = (event) => {
-		event.preventDefault();
-		alert(Math.round(weight / height ** 2));
-	};
-
 	return (
 		<div className='container my-0 mx-auto'>
 			<h1 className='text-3xl font-bold text-center my-4'>BMI Calculator</h1>
 			<form
 				className='flex justify-center items-center gap-8'
-				onSubmit={onSubmit}>
+				onSubmit={(event) => {
+					event.preventDefault();
+					fetch(
+						`http://localhost:8000/calculate-bmi?weight=${weight}&height=${height}`,
+						{
+							method: 'POST',
+						}
+					)
+						.then((response) => response.json())
+						.then((json) =>
+							alert(`Your BMI is ${json.BMI} and your are ${json.category}`)
+						);
+				}}>
 				<input
 					type='number'
 					className='bg-gray-300 block my-4 rounded-sm p-1'
