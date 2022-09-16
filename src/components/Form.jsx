@@ -10,29 +10,46 @@ const Form = () => {
 			<form
 				className='flex justify-center items-center gap-8'
 				onSubmit={(event) => {
-					event.preventDefault();
-					fetch(
-						`https://fastapi-production-92af.up.railway.app/calculate-bmi?weight=${weight}&height=${height}`,
-						{
-							method: 'POST',
-						}
-					)
-						.then((response) => response.json())
-						.then((json) =>
-							alert(`Your BMI is ${json.BMI} and your are ${json.category}`)
-						);
+					if (
+						!height ||
+						!weight ||
+						isNaN(Number(weight)) ||
+						isNaN(Number(height)) ||
+						height < 0 ||
+						weight < 0
+					) {
+						alert('please enter a valid input');
+					} else {
+						event.preventDefault();
+						fetch(
+							`https://fastapi-production-92af.up.railway.app/calculate-bmi?weight=${weight}&height=${height}`,
+							{
+								method: 'POST',
+							}
+						)
+							.then((response) => response.json())
+							.then((json) =>
+								json.BMI === 0
+									? alert('please enter a valid input')
+									: alert(
+											`Your BMI is ${json.BMI} and your are ${json.category}`
+									  )
+							);
+					}
+					setHeight('');
+					setWeight('');
 				}}>
 				<input
 					type='number'
 					className='bg-gray-300 block my-4 rounded-sm p-1'
-					placeholder='Weight'
+					placeholder='Weight (KG)'
 					value={weight}
 					onChange={({ target }) => setWeight(target.value)}
 				/>
 				<input
 					type='number'
 					className='bg-gray-300 block my-4 rounded-sm p-1'
-					placeholder='Height'
+					placeholder='Height (M)'
 					value={height}
 					onChange={({ target }) => setHeight(target.value)}
 				/>
