@@ -54,7 +54,7 @@ const Form = () => {
 					onChange={({ target }) => setHeight(target.value)}
 				/>
 				<button
-					className='bg-blue-500 px-8 rounded-md shadow-sm h-8'
+					className='text-white bg-blue-500 px-8 rounded-md shadow-sm h-8'
 					type='submit'>
 					Calculate
 				</button>
