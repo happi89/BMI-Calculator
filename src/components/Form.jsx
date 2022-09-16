@@ -12,7 +12,7 @@ const Form = () => {
 				onSubmit={(event) => {
 					event.preventDefault();
 					fetch(
-						`http://localhost:8000/calculate-bmi?weight=${weight}&height=${height}`,
+						`https://fastapi-production-92af.up.railway.app/calculate-bmi?weight=${weight}&height=${height}`,
 						{
 							method: 'POST',
 						}
