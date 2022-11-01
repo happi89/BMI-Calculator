@@ -24,7 +24,7 @@ const Form = () => {
 					} else {
 						event.preventDefault();
 						fetch(
-							`https://web-production-4953.up.railway.app/calculate-bmi?weight=${weight}&height=${height}`,
+							`https://web-production-4953.up.railway.app/calculate-bmi?weight=${weight}&height=${height}&unit=${unit}`,
 							{
 								method: 'POST',
 							}
